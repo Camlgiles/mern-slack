@@ -6,6 +6,7 @@ const users = require('./routes/api/users');
 const messages = require('./routes/api/messages');
 const User = require('./models/User');
 const bodyParser = require('body-parser');
+const passport = require('passport');
 
 
 mongoose
@@ -13,6 +14,9 @@ mongoose
   .then(() => console.log("Connected to MongoDB"))
   .catch(err => console.log(err));
 
+
+app.use(passport.initialize());
+require("./config/passport")(passport);
 
 // app will respond to postman
 app.use(bodyParser.urlencoded({
